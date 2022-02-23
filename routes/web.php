@@ -13,7 +13,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use SebastianBergmann\CodeCoverage\CrapIndex;
 use App\Http\Controllers\CrudbarangController;
+use App\Http\Controllers\KonsumenController;
 use App\Http\Controllers\LembagaController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PembelanjaanController;
 
 /*
@@ -60,6 +62,9 @@ Route::get('/tambahkategori/checkSlug',[CategoryController::class,'checkSlug'])-
 Route::get('/pembelanjaan',[PembelanjaanController::class,'datapembelanjaan'])->middleware('auth');
 Route::get('/lembaga',[LembagaController::class,'index'])->middleware('auth');
 Route::post('/tambahlembaga',[LembagaController::class,'store'])->middleware('auth');
+Route::get('/konsumen',[KonsumenController::class,'index'])->middleware('auth');
+Route::get('/tambahpembayaran',[PembayaranController::class,'tambah_pembayaran'])->middleware('auth');
+Route::get('/tabelpembayaran',[PembayaranController::class,'index'])->middleware('auth');
 
 
 

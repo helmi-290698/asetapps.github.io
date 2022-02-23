@@ -38,10 +38,18 @@
                     <a href="/lembaga" class="waves-effect"><i class="mdi mdi-city"></i><span>Lembaga </span></a>
                 </li>
                 <li>
-                    <a href="/Konsumen" class="waves-effect"><i class="mdi mdi-account-details"></i><span>Konsumen </span></a>
+                    <a href="/konsumen" class="waves-effect"><i class="mdi mdi-account-details"></i><span>Konsumen </span></a>
                 </li>
                 <li>
                     <a href="/pembelanjaan" class="waves-effect"><i class="mdi mdi-cart"></i><span> Pembelanjaan </span></a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-folder-open-outline"></i><span> Pembayaran <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                    <ul class="submenu">
+                        <li><a href="/tambahpembayaran">Tambah Pembayaran</a></li>
+                        <li><a href="/tabelpembayaran">Table Pembayaran</a></li>
+                      
+                    </ul>
                 </li>
 
 
