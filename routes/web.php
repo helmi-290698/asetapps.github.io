@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use SebastianBergmann\CodeCoverage\CrapIndex;
 use App\Http\Controllers\CrudbarangController;
+use App\Http\Controllers\JasaController;
 use App\Http\Controllers\KonsumenController;
 use App\Http\Controllers\LembagaController;
 use App\Http\Controllers\PembayaranController;
@@ -63,9 +64,12 @@ Route::get('/pembelanjaan',[PembelanjaanController::class,'datapembelanjaan'])->
 Route::get('/lembaga',[LembagaController::class,'index'])->middleware('auth');
 Route::post('/tambahlembaga',[LembagaController::class,'store'])->middleware('auth');
 Route::get('/konsumen',[KonsumenController::class,'index'])->middleware('auth');
+Route::post('/tambahkonsumen',[KonsumenController::class,'store'])->middleware('auth');
 Route::get('/tambahpembayaran',[PembayaranController::class,'tambah_pembayaran'])->middleware('auth');
 Route::get('/tabelpembayaran',[PembayaranController::class,'index'])->middleware('auth');
-
-
+Route::get('/jasa',[JasaController::class,'index'])->middleware('auth');
+Route::post('/jasa',[JasaController::class,'store'])->middleware('auth');
+Route::post('/tambahpembelanjaan',[PembelanjaanController::class,'store'])->middleware('auth');
+Route::post('/tambahpembayaran',[PembayaranController::class,'store'])->middleware('auth');
 
 

@@ -9,5 +9,8 @@ class Lembaga extends Model
 {
     use HasFactory;
     protected $guarded = ['id_lembaga'];
+    public function konsumen(){
+        return $this->hasMany(Konsumen::class);
+    }
    
 }

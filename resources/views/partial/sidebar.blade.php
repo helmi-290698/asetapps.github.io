@@ -13,11 +13,22 @@
                 </li>
 
                 <li>
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-folder-open-outline"></i><span> Tabel Barang <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-folder-open-outline "></i><span> Tabel Barang <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
                     <ul class="submenu">
                         <li><a href="/fisik">Fisik</a></li>
                         <li><a href="/virtual">Virtual</a></li>
                       
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-clipboard-text"></i><span> Konsumen <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                    <ul class="submenu">
+                        <li><a href="/konsumen" class="waves-effect"><i class="mdi mdi-account-plus"></i><span>Data Konsumen </span></a></li>
+                        <li><a href="/lembaga" class="waves-effect"><i class="mdi mdi-city"></i><span>Lembaga </span></a></li>
+                        <li><a href="/pembelanjaan" class="waves-effect"><i class="mdi mdi-cart"></i><span> Pembelanjaan </span></a></li>
+                        <li><a href="/jasa" class="waves-effect"><i class="mdi mdi-briefcase-plus-outline"></i><span>Jasa </span></a></li>
+                        <li><a href="/tambahpembayaran"><i class="mdi mdi-cash"></i><span>Tambah Pembayaran </span></a></li>
+                       
                     </ul>
                 </li>
                
@@ -35,22 +46,9 @@
                     <a href="/user" class="waves-effect"><i class="mdi mdi-account-multiple-outline"></i><span>User </span></a>
                 </li>
                 <li>
-                    <a href="/lembaga" class="waves-effect"><i class="mdi mdi-city"></i><span>Lembaga </span></a>
+                    <a href="/tabelpembayaran" class="waves-effect"><i class="mdi mdi-format-columns"></i><span>Table Pembayaran </span></a>
                 </li>
-                <li>
-                    <a href="/konsumen" class="waves-effect"><i class="mdi mdi-account-details"></i><span>Konsumen </span></a>
-                </li>
-                <li>
-                    <a href="/pembelanjaan" class="waves-effect"><i class="mdi mdi-cart"></i><span> Pembelanjaan </span></a>
-                </li>
-                <li>
-                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-folder-open-outline"></i><span> Pembayaran <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
-                    <ul class="submenu">
-                        <li><a href="/tambahpembayaran">Tambah Pembayaran</a></li>
-                        <li><a href="/tabelpembayaran">Table Pembayaran</a></li>
-                      
-                    </ul>
-                </li>
+                
 
 
                

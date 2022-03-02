@@ -33,4 +33,9 @@ class LembagaController extends Controller
 
        return redirect('/lembaga');
     }
+
+    public function getDataLembaga(){
+
+        
+    }
 }

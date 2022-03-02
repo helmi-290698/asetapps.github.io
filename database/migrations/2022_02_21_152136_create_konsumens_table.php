@@ -21,6 +21,7 @@ class CreateKonsumensTable extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('no_telepon');
+            $table->enum('jenis_kelamin',['Laki-Laki','Perempuan']);
             $table->timestamps();
         });
     }

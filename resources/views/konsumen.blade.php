@@ -27,7 +27,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title mt-0">Form Status</h5>
+                                <h5 class="modal-title mt-0">Form Konsumen</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -38,39 +38,49 @@
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-4 col-form-label">Nama</label>
                                         <div class="col-sm-8">
-                                            <input class="form-control " type="text"  name="nama" id="nama" required >
-                                            
+                                            <input class="form-control @error('nama') is-invalid @enderror" type="text"  name="nama" id="nama" >
+                                            @error('nama')
+                                            <div class="form-control-feedback mt-2">{{ $message }}.</div>
+                                                
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-4 col-form-label">Nama Lembaga</label>
                                         <div class="col-sm-8">
-                                            <select name="lembaga" id="" class="form-control">
-                                                <option value="">perorangan</option>
-                                                <option value="">leekay</option>
+                                            <select name="lembaga" id="lembaga" class="form-control">
+                                                @foreach ($lembagas as $lembaga)
+                                                <option value="{{ $lembaga->id_lembaga }}">{{ $lembaga->nama_lembaga }}</option>
+                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="jeniskelamin" class="col-sm-4 col-form-label">Jenis Kelamin</label>
                                         <div class="col-sm-8">
-                                            <select name="jenis_kelamin" id="" class="form-control">
-                                                <option value="">Laki-Laki</option>
-                                                <option value="">Perempuan</option>
-                                            </select>
+                                            <input type="radio" class="mr-2" name="jenis_kelamin" id="jeniskelamin" value="Laki-Laki">Laki-Laki &nbsp;
+                                            <input type="radio" class="mr-2" name="jenis_kelamin" id="jeniskelamin" value="Perempuan">Perempuan  
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-4 col-form-label">No Telepon</label>
                                         <div class="col-sm-8">
-                                            <input class="form-control " type="text"  name="no_telepon" id="notelepon" required >
-                                            
+                                            <input class="form-control @error('no_telepon') is-invalid @enderror" type="text"  name="no_telepon" id="notelepon"  >
+                                            @error('no_telepon')
+                                            <div class="form-control-feedback mt-2">{{ $message }}.</div>
+                                                
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="status" class="col-sm-4 col-form-label">Alamat</label>
                                         <div class="col-sm-8">
-                                            <textarea name="alamat" class="form-control" id="" cols="10" rows="3"></textarea>
+                                            <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="" cols="10" rows="3"></textarea>
+                                            @error('alamat')
+                                            <div class="form-control-feedback mt-2">{{ $message }}.</div>
+                                                
+                                            @enderror
                                         </div>
                                     </div>
                                     
@@ -100,7 +110,7 @@
                             <tr>
                                 <td>{{ $konsumen->id }}</td>
                                 <td>{{ $konsumen->nama }}</td>
-                                <td>{{ $konsumen->id_lembaga }}</td>
+                                <td>{{ $konsumen->nama_lembaga }}</td>
                                 <td>{{ $konsumen->alamat }}</td>
                                 <td>{{ $konsumen->no_telepon }}</td>
                                 <td>{{ $konsumen->created_at  }}</td>

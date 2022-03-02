@@ -17,7 +17,6 @@ class CreatePembelanjaansTable extends Migration
             $table->id('id_pembelanjaan');
             $table->foreignId('id_categories');
             $table->string('nama_barang');
-            $table->string('jenis_barang');
             $table->integer('harga');
             $table->string('merek');
             $table->integer('jumlah');
