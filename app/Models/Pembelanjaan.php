@@ -8,5 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Pembelanjaan extends Model
 {
     use HasFactory;
-    protected $guarded= ['id_pembelanjaan'];
+    protected $guarded= ['id'];
+    public function pembiayaan(){
+        return $this->hasMany(Pembiayaan::class);
+    }
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

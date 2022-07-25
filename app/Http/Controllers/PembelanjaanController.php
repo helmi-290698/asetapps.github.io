@@ -10,25 +10,24 @@ class PembelanjaanController extends Controller
     public function datapembelanjaan(){
         return view('pembelanjaan',[
             "title" => "Data Pembelanjaan",
-            "pembelanjaans" => Pembelanjaan::all(),
+            "pembelanjaans" => Pembelanjaan::with('category')->get(),
             "categories" => Category::all()
            
         ]);
     }
     public function store(Request $request){
+        // dd($request->all());
         $datapost = $request->validate([
             'barang' =>'required',
-            'merek' => 'required',
-            'kategori' => 'required',
+            'tipebiaya' =>'required',
             'harga' => 'required',
-            'jumlah' => 'required',
-            'total' => 'required',
             'tglpembelian' => 'required'
 
         ]);
 
        Pembelanjaan::create([
-            'id_categories' => $request->kategori,
+            'tipe_biaya' => $request->tipebiaya,
+            'category_id' => $request->kategori,
             'nama_barang' => $request->barang,
             'harga' => $request->harga,
             'merek' => $request->merek,
@@ -40,5 +39,10 @@ class PembelanjaanController extends Controller
         
 
        return redirect('/pembelanjaan');
+    }
+    public function getPembelanjaanId($id){
+        $query=Pembelanjaan::where('id',$id)->first();
+
+        return response()->json(['pembelanjaan' =>$query]);
     }
 }

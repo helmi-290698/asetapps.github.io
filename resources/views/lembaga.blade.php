@@ -64,7 +64,7 @@
                         <tbody>
                             @foreach ($lembagas as $lembaga)
                             <tr>
-                                <td>{{ $lembaga->id_lembaga }}</td>
+                                <td>{{ $lembaga->id }}</td>
                                 <td>{{ $lembaga->nama_lembaga }}</td>
                                 <td>{{ $lembaga->created_at  }}</td>
                                 <td>{{ $lembaga->updated_at  }}</td>

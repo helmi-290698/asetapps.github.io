@@ -13,6 +13,9 @@ class Category extends Model
     public function barang(){
         return $this->hasMany(Barang::class);
     }
+    public function pembelanjaan(){
+        return $this->hasMany(Pembelanjaan::class);
+    }
     public function sluggable(): array
     {
         return [

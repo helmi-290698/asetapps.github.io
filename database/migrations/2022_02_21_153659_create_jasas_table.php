@@ -14,7 +14,7 @@ class CreateJasasTable extends Migration
     public function up()
     {
         Schema::create('jasas', function (Blueprint $table) {
-            $table->id('id_jasa');
+            $table->id();
             $table->string('nama_jasa');
             $table->integer('biaya');
             $table->timestamps();

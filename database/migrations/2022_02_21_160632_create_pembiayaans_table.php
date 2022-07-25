@@ -15,12 +15,9 @@ class CreatePembiayaansTable extends Migration
     {
         Schema::create('pembiayaans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_konsumen');
-            $table->foreignId('id_pembelanjaan');
-            $table->foreignId('id_jasa');
+            $table->foreignId('konsumen_id');
+            $table->foreignId('pembelanjaan_id')->nullable();
             $table->string('no_invoice');
-            $table->integer('total_biaya');
-            $table->integer('total_bayar');
             $table->timestamps();
         });
     }

@@ -50,7 +50,7 @@
                                         <div class="col-sm-8">
                                             <select name="lembaga" id="lembaga" class="form-control">
                                                 @foreach ($lembagas as $lembaga)
-                                                <option value="{{ $lembaga->id_lembaga }}">{{ $lembaga->nama_lembaga }}</option>
+                                                <option value="{{ $lembaga->id }}">{{ $lembaga->nama_lembaga }}</option>
                                                 @endforeach
                                                 
                                             </select>
@@ -110,7 +110,7 @@
                             <tr>
                                 <td>{{ $konsumen->id }}</td>
                                 <td>{{ $konsumen->nama }}</td>
-                                <td>{{ $konsumen->nama_lembaga }}</td>
+                                <td>{{ $konsumen->lembaga->nama_lembaga }}</td>
                                 <td>{{ $konsumen->alamat }}</td>
                                 <td>{{ $konsumen->no_telepon }}</td>
                                 <td>{{ $konsumen->created_at  }}</td>

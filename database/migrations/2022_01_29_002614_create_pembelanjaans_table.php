@@ -14,13 +14,14 @@ class CreatePembelanjaansTable extends Migration
     public function up()
     {
         Schema::create('pembelanjaans', function (Blueprint $table) {
-            $table->id('id_pembelanjaan');
-            $table->foreignId('id_categories');
+            $table->id();
+            $table->enum('tipe_biaya',['Barang','Jasa']);
+            $table->foreignId('category_id')->nullable();
             $table->string('nama_barang');
             $table->integer('harga');
-            $table->string('merek');
-            $table->integer('jumlah');
-            $table->string('tgl_pembelian');
+            $table->string('merek')->nullable();
+            $table->integer('jumlah')->nullable();
+            $table->string('tgl_pembelian')->nullable();
             $table->timestamps();
         });
     }

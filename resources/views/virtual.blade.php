@@ -134,7 +134,7 @@
                                     <td>{{ $barang->status->nama_status }}</td>
                                     <td>
                                         <div>
-                                            <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail"><i class="mdi mdi-eye-circle-outline"></i></a> <a href="#" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Edit data"><i class="mdi mdi-pencil"></i></a>&nbsp;<a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete data"><i class="mdi mdi-delete"></i></a>&nbsp;<a href="{{ $barang->link_aset }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Login"><i class="mdi mdi-login"></i></a>
+                                            <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Detail"><i class="mdi mdi-eye-circle-outline"></i></a> <a href="#" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Edit data"><i class="mdi mdi-pencil"></i></a>&nbsp;<a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete data"><i class="mdi mdi-delete"></i></a>&nbsp;<a href="{{ $barang->link_aset }}" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" target="_blank" title="Login"><i class="mdi mdi-login"></i></a>
                                         </div>
                                     </td>
                                     

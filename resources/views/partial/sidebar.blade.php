@@ -25,10 +25,10 @@
                     <ul class="submenu">
                         <li><a href="/konsumen" class="waves-effect"><i class="mdi mdi-account-plus"></i><span>Data Konsumen </span></a></li>
                         <li><a href="/lembaga" class="waves-effect"><i class="mdi mdi-city"></i><span>Lembaga </span></a></li>
-                        <li><a href="/pembelanjaan" class="waves-effect"><i class="mdi mdi-cart"></i><span> Pembelanjaan </span></a></li>
-                        <li><a href="/jasa" class="waves-effect"><i class="mdi mdi-briefcase-plus-outline"></i><span>Jasa </span></a></li>
+                        <li><a href="/pembelanjaan" class="waves-effect"><i class="mdi mdi-cart"></i><span> Biaya </span></a></li>
                         <li><a href="/tambahpembayaran"><i class="mdi mdi-cash"></i><span>Tambah Pembayaran </span></a></li>
-                       
+                        <li><a href="/tabelbiaya" class="waves-effect"><i class="mdi mdi-format-columns"></i><span>Table Biaya </span></a></li>
+                        <li><a href="/tabelpembayaran" class="waves-effect"><i class="mdi mdi-format-columns"></i><span>Table Pembayaran </span></a></li>
                     </ul>
                 </li>
                
@@ -44,9 +44,6 @@
                 </li>
                 <li>
                     <a href="/user" class="waves-effect"><i class="mdi mdi-account-multiple-outline"></i><span>User </span></a>
-                </li>
-                <li>
-                    <a href="/tabelpembayaran" class="waves-effect"><i class="mdi mdi-format-columns"></i><span>Table Pembayaran </span></a>
                 </li>
                 
 

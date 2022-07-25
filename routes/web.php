@@ -18,6 +18,7 @@ use App\Http\Controllers\KonsumenController;
 use App\Http\Controllers\LembagaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PembelanjaanController;
+use App\Http\Controllers\PembiayaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,47 +30,51 @@ use App\Http\Controllers\PembelanjaanController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',function(){
-    return redirect('/login');
-});
 
-Route::get('/login', [LoginController::class,'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class,'authenticate']);
-Route::post('/logout', [LoginController::class,'logout']);
+Route::get('/', [IndexController::class, 'index']);
 
-Route::get('/home', [BarangController::class,'All_barang'])->middleware('auth');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/home', [BarangController::class, 'All_barang'])->middleware('auth');
 Route::get('/fisik', [BarangController::class, 'data_fisik'])->middleware('auth');
-Route::get('/tambah/category',function(){
-    return view('inputcategori',[
-        "title" =>"Tambah Category"
+Route::get('/tambah/category', function () {
+    return view('inputcategori', [
+        "title" => "Tambah Category"
     ]);
 })->middleware('auth');
-Route::get('/virtual', [BarangController::class,'data_virtual'])->middleware('auth');
-Route::get('/tambahfisik',[BarangController::class,'tambahfisikform'])->middleware('auth');
-Route::post('/tambahfisik',[BarangController::class,'store'])->middleware('auth');
-Route::get('/tambahvirtual',[BarangController::class,'tambahvirtualform'])->middleware('auth');
-Route::post('/tambahvirtual',[BarangController::class,'store_virtual'])->middleware('auth');
-Route::get('/category',[CategoryController::class,'index'])->middleware('auth');
-Route::post('/tambahcategory',[CategoryController::class,'store'])->middleware('auth');
-Route::get('/user',[UserController::class,'index'])->middleware('auth');
-Route::get('/user/tambahuser',[UserController::class,'tambah_user'])->middleware('auth');
-Route::post('/user/tambahuser',[RegisterController::class,'store']);
-Route::get('/testing',[BarangController::class,'tes']);
-Route::get('/status',[StatusController::class,'index'])->middleware('auth');
-Route::post('/tambahstatus',[StatusController::class,'store']);
-Route::get('/tambahfisik/checkSlug',[BarangController::class,'checkSlug'])->middleware('auth');
-Route::get('/tambahstatus/checkSlug',[StatusController::class,'checkSlug'])->middleware('auth');
-Route::get('/tambahkategori/checkSlug',[CategoryController::class,'checkSlug'])->middleware('auth');
-Route::get('/pembelanjaan',[PembelanjaanController::class,'datapembelanjaan'])->middleware('auth');
-Route::get('/lembaga',[LembagaController::class,'index'])->middleware('auth');
-Route::post('/tambahlembaga',[LembagaController::class,'store'])->middleware('auth');
-Route::get('/konsumen',[KonsumenController::class,'index'])->middleware('auth');
-Route::post('/tambahkonsumen',[KonsumenController::class,'store'])->middleware('auth');
-Route::get('/tambahpembayaran',[PembayaranController::class,'tambah_pembayaran'])->middleware('auth');
-Route::get('/tabelpembayaran',[PembayaranController::class,'index'])->middleware('auth');
-Route::get('/jasa',[JasaController::class,'index'])->middleware('auth');
-Route::post('/jasa',[JasaController::class,'store'])->middleware('auth');
-Route::post('/tambahpembelanjaan',[PembelanjaanController::class,'store'])->middleware('auth');
-Route::post('/tambahpembayaran',[PembayaranController::class,'store'])->middleware('auth');
-
-
+Route::get('/virtual', [BarangController::class, 'data_virtual'])->middleware('auth');
+Route::get('/tambahfisik', [BarangController::class, 'tambahfisikform'])->middleware('auth');
+Route::post('/tambahfisik', [BarangController::class, 'store'])->middleware('auth');
+Route::get('/tambahvirtual', [BarangController::class, 'tambahvirtualform'])->middleware('auth');
+Route::post('/tambahvirtual', [BarangController::class, 'store_virtual'])->middleware('auth');
+Route::get('/category', [CategoryController::class, 'index'])->middleware('auth');
+Route::post('/tambahcategory', [CategoryController::class, 'store'])->middleware('auth');
+Route::get('/user', [UserController::class, 'index'])->middleware('auth');
+Route::get('/user/tambahuser', [UserController::class, 'tambah_user'])->middleware('auth');
+Route::post('/user/tambahuser', [RegisterController::class, 'store']);
+Route::get('/testing', [BarangController::class, 'tes']);
+Route::get('/status', [StatusController::class, 'index'])->middleware('auth');
+Route::post('/tambahstatus', [StatusController::class, 'store']);
+Route::get('/tambahfisik/checkSlug', [BarangController::class, 'checkSlug'])->middleware('auth');
+Route::get('/tambahstatus/checkSlug', [StatusController::class, 'checkSlug'])->middleware('auth');
+Route::get('/tambahkategori/checkSlug', [CategoryController::class, 'checkSlug'])->middleware('auth');
+Route::get('/pembelanjaan', [PembelanjaanController::class, 'datapembelanjaan'])->middleware('auth');
+Route::get('/lembaga', [LembagaController::class, 'index'])->middleware('auth');
+Route::post('/tambahlembaga', [LembagaController::class, 'store'])->middleware('auth');
+Route::get('/konsumen', [KonsumenController::class, 'index'])->middleware('auth');
+Route::post('/tambahkonsumen', [KonsumenController::class, 'store'])->middleware('auth');
+Route::get('/tambahpembayaran', [PembiayaanController::class, 'tambah_pembayaran'])->middleware('auth');
+Route::get('/tabelbiaya', [PembiayaanController::class, 'index'])->middleware('auth');
+Route::delete('/tabelbiaya/deletebiaya/{id}/{noinvoice}', [PembiayaanController::class, 'destroy'])->middleware('auth');
+Route::get('/jasa', [JasaController::class, 'index'])->middleware('auth');
+Route::post('/jasa', [JasaController::class, 'store'])->middleware('auth');
+Route::post('/tambahpembelanjaan', [PembelanjaanController::class, 'store'])->middleware('auth');
+Route::post('/tambahpembayaran', [PembiayaanController::class, 'store'])->middleware('auth');
+Route::get('/tambahpembayaran/get-form', [PembiayaanController::class, 'getForm'])->middleware('auth');
+Route::get('/tabelpembayaran', [PembayaranController::class, 'index'])->middleware('auth');
+Route::get('/invoice/{id}', [PembayaranController::class, 'invoice'])->middleware('auth');
+Route::get('/pembayaran/{id}/update', [PembayaranController::class, 'getPembayaranId'])->middleware('auth');
+Route::patch('/pembayaran/{id}/update', [PembayaranController::class, 'bayarInvoice'])->middleware('auth');
+Route::get('/pembelanjaan/{id}/update', [PembelanjaanController::class, ''])->middleware('auth');

@@ -70,7 +70,7 @@
                         <tr>
                             <th>No Invoice</th>
                             <th>Nama</th>
-                            <th>Grand Total</th>
+                            <th>Total Biaya</th>
                             <th>Jumlah Bayar</th>
                             <th>Sisa Bayar</th>
                             <th>Action</th>
@@ -80,24 +80,66 @@
 
                         <tbody>
                            
-                            <tr>
-                                <td>Hp001</td>
-                                <td>Helmi</td>
-                                <td>Rp 150.000</td>
-                                <td>Rp 100.000</td>
-                                <td><span class="badge badge-pill badge-warning mr-2 ">unpaid</span>Rp 50.000</td>
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                        <a href="#" class="btn btn-success btn-sm">Cetak</a>
-                                    </div>
-                                </td>
-                            </tr>
+                           @foreach ($pembayarans as $pembayaran)
+                           
+                           <tr>
+                            <td>#{{ $pembayaran->no_invoice }}</td>
+                            <td>{{ $pembayaran->nama_konsumen }}</td>
+                            <td> Rp. {{  number_format($pembayaran->total_biaya,2,',','.')  }}</td>
+                            <td> Rp. {{  number_format($pembayaran->jumlah_bayar,2,',','.')  }}</td>
+                            <td>
+                                @if ($pembayaran->total_biaya-$pembayaran->jumlah_bayar == 0 )
+                               <h5><span class="badge badge-success ">Paid</span></h5>
+                                @else
+                                <span class="badge badge-success ">Unpaid</span>&nbsp; Rp. {{  number_format($pembayaran->total_biaya-$pembayaran->jumlah_bayar,2,',','.')  }}
+                                @endif
+                              </td>
+                            <td>
+                                <div>
+                                    <button class="btn btn-primary btn-sm edit" data-toggle="modal" data-target=".bs-example-modal-center" data-id="{{ $pembayaran->id }}">Bayar</button>
+                                    <a href="/invoice/{{  $pembayaran->id }}" class="btn btn-success btn-sm">Cetak</a>
+                                </div>
+                            </td>
+                        </tr>
+                           @endforeach
+                            
                            
                         
                         
                         </tbody>
                     </table>
+                    <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title mt-0">Form Bayar </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" id="edit-pembayaran-form">
+                                        @method('patch')
+                                        @csrf
+                                        <div class="form-group row">
+                                            <label for="status" class="col-sm-4 col-form-label">Id Pembayaran</label>
+                                            <div class="col-sm-8 mb-2">
+                                                <input class="form-control" type="text"  name="pembayaran_id" id="pembayaran_id" disabled>
+                                                
+                                            </div>
+                                            <label for="status" class="col-sm-4 col-form-label">Jumlah Bayar </label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control " type="text"  name="jumlah_bayar" id="status" required >
+                                                
+                                            </div>
+                                        </div>
+                                       
+                                        <button type="submit" class="btn btn-success float-right">Simpan</button>
+                                    </form>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
                 </div>
 
             </div>
@@ -107,4 +149,26 @@
 </div>
 <!-- END ROW -->
     </div>
+@endsection
+@section('footer')
+    <script>
+        $(function(){
+
+            $(".edit").on('click',function(){
+                let id = $(this).data('id');
+                console.log(id);
+                $.ajax({
+                    url:`/pembayaran/${id}/update`,
+                    method:'GET',
+                success: function (data){
+
+                    $("#edit-pembayaran-form").attr('action', `pembayaran/`+data.pembayaran.id+`/update`);
+                    $('input[name="pembayaran_id"]').val(data.pembayaran.id);
+                   
+                }
+        })
+        
+    })
+})
+    </script>
 @endsection

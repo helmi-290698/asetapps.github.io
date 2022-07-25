@@ -32,113 +32,35 @@
                         <form action="/tambahpembayaran" method="post">
                             @csrf
                             @php
-                          $kb = "0";
-                          if ($invoices == null) {
-                              $kb = "0";
-                              
-                          }else {
-                              $kb = $invoices->no_invoice;
-                          }
-                      
-                        $datahasil= $kb;
-                              $str =substr($datahasil, -1);
-                          $tambah = $str + 1 ;
-                            $sprintf = sprintf("%04d",$tambah) ;
+                               $random = rand(10000,99999);
                             
                           @endphp
                             <div class="form-group">
                                 <label>No Invoice</label>
-                                <input type="text" class="colorpicker-default form-control" name="noinvoice" value="{{ "#Hp".$sprintf }}" readonly>
+                                <input type="text" class="colorpicker-default form-control" name="noinvoice" value="{{$random }}" >
                             </div>
                             <div class="form-group">
                                 <label>Nama konsumen</label>
                                 <select name="namakonsumen" id="" class="form-control" >
                                     @foreach ($konsumens as $konsumen)
-                                    <option value="{{ $konsumen->nama }}">{{ $konsumen->nama }}</option>
+                                    <option value="{{ $konsumen->id }}">{{ $konsumen->nama }}</option>
                                     @endforeach 
                                 </select>
                             </div>
                             <hr>
-                        <div class="control-group after-add-more">
+                       
                             <div class="form-group">
                                 <label>Nama Barang</label>
                                 <div class="row">
-                                    <div class="col-8">
-                                        <select name="namabarang[]" id="" class="form-control " >
-                                            @foreach ($barangs as $barang)
-                                            <option value="{{ $barang->id_pembelanjaan }}">{{ $barang->nama_barang }}</option>
-                                            @endforeach
-                                           
-                                        </select>
-
-                                    </div>
+                                   
                                     <div class="col-4">
-                                        <button class="btn btn-primary add-more" type="button"><i class="mdi mdi-plus"></i></button>
+                                        <button class="btn btn-primary tambahbarang" type="button">Tambah Barang<i class="mdi mdi-plus"></i></button>
                                     </div>
                                 </div>   
                             </div>
-                        </div>
-                        <div class="copy d-none">
-                            <div class="control-group">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <select name="namabarang[]" id="" class="form-control " >
-                                                @foreach ($barangs as $barang)
-                                                <option value="{{ $barang->id_pembelanjaan }}">{{ $barang->nama_barang }}</option>
-                                                @endforeach
-                                            </select>
-    
-                                        </div>
-                                        <div class="col-4">
-                                            <button class="btn btn-danger remove" type="button"><i class="mdi mdi-delete"></i></button>
-                                        </div>
-                                    </div>   
-                                </div>
-                            </div>
-                        </div>
-                            <hr>
-                            <div class="control-group1 after-add-more1">
-                                <div class="form-group">
-                                    <label>Nama Barang</label>
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <select name="namajasa[]" id="" class="form-control " >
-                                                @foreach ($jasas as $jasa)
-                                                <option value="{{ $jasa->id_jasa }}">{{ $jasa->nama_jasa }}</option> 
-                                                @endforeach
-                                                
-                                            </select>
-    
-                                        </div>
-                                        <div class="col-4">
-                                            <button class="btn btn-primary add-more1" type="button"><i class="mdi mdi-plus"></i></button>
-                                        </div>
-                                    </div>   
-                                </div>
-                            </div>
-                            <div class="copy1 d-none">
-                                <div class="control-group1">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <select name="namajasa[]" id="" class="form-control " >
-                                                    @foreach ($jasas as $jasa)
-                                                    <option value="{{ $jasa->id_jasa }}">{{ $jasa->nama_jasa }}</option> 
-                                                    @endforeach
-                                                </select>
-        
-                                            </div>
-                                            <div class="col-4">
-                                                <button class="btn btn-danger remove1" type="button"><i class="mdi mdi-delete"></i></button>
-                                            </div>
-                                        </div>   
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
+                            <div class="barang"></div>
                                 <input type="submit" value="simpan" class="btn btn-success float-right">
-                             </div>
+                             
                             
                         </form>
 
@@ -163,18 +85,59 @@
 @endsection
 @section('footer')
 <script type="text/javascript">
-    $(document).ready(function() {
-      $(".add-more").click(function(){ 
-          var html = $(".copy").html();
-          $(".after-add-more").after(html);
-      });
+$('.tambahbarang').on('click',function(){
+    addbarang();
 
-      // saat tombol remove dklik control group akan dihapus 
-      $("body").on("click",".remove",function(){ 
+});
+function addbarang(){
+    var data='<div class="control-group">'+
+                ' <div class="form-group">'+
+                     '<div class="row"><div class="col-8">'+
+                        '<select name="namabarang[]" id="" class="form-control " >'+
+                            '@foreach ($barangs as $barang)'+
+                            '<option value="{{ $barang->id }}">'+
+                              ' {{ $barang->nama_barang }}</option>'+
+                               ' @endforeach' +
+                        '</select></div><div class="col-4">'+
+                     '<button class="remove btn btn-danger" type="button"><i class="mdi mdi-delete"></i></button>'+
+                   '</div>'+
+                 '</div>'+
+                '</div>';
+    $('.barang').append(data);
+};
+
+$("body").on("click",".remove",function(){ 
           $(this).parents(".control-group").remove();
-      });
-    });
+});
+
 </script>
+{{-- <script type="text/javascript">
+    $('.tambahjasa').on('click',function(){
+        addjasa();
+    
+    });
+    function addjasa(){
+        var data='<div class="control-group1">'+
+                    ' <div class="form-group">'+
+                         '<div class="row"><div class="col-8">'+
+                            '<select name="namajasa[]" id="" class="form-control " >'+
+                                '@foreach ($jasas as $jasa)'+
+                                '<option value="{{ $jasa->id }}">'+
+                                  ' {{ $jasa->nama_jasa }}</option>'+
+                                   ' @endforeach' +
+                            '</select></div><div class="col-4">'+
+                         '<button class="remove btn btn-danger" type="button"><i class="mdi mdi-delete"></i></button>'+
+                       '</div>'+
+                     '</div>'+
+                    '</div>';
+        $('.jasa').append(data);
+    };
+    
+    $("body").on("click",".remove",function(){ 
+              $(this).parents(".control-group1").remove();
+    });
+    
+    </script> --}}
 <script type="text/javascript">
     $(document).ready(function() {
       $(".add-more1").click(function(){ 
@@ -196,6 +159,8 @@
             .then(respone => respone.json())
             .then(data => slug.value = data.slug)
         });
+
+        
     
 </script>
 <script src="{{ asset('../plugins/dropzone/dist/dropzone.js') }}"></script>

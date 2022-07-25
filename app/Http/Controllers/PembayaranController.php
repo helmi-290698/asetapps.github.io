@@ -6,30 +6,50 @@ use App\Models\Jasa;
 use App\Models\Konsumen;
 use App\Models\Pembayaran;
 use App\Models\Pembelanjaan;
+use App\Models\Pembiayaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class PembayaranController extends Controller
 {
+    
     public function index(){
+        $pembayaran = Pembayaran::all();
+   
         return view('pembayaran',[
-            "title" => "Data Pembayaran",
+            "title" => "Data Pembiayaan",
+            "pembayarans" => $pembayaran 
             
         ]);
     }
-    public function tambah_pembayaran(){
-        return view('form.tambahpembayaran',[
-            "title" => "Tambah pembayaran",
-            "invoices" => Pembayaran::orderBy('created_at', 'desc')->first(),
-            "konsumens" => Konsumen::all(),
-            "jasas" => Jasa::all(),
-            "barangs" => Pembelanjaan::all()
+    public function invoice($id){
+       
+  
+       $data = Pembayaran::with('pembiayaan.pembelanjaan','pembiayaan.konsumen','pembiayaan.konsumen.lembaga')->where('id',$id)->get();
+        foreach($data as $hasil){
 
+        }
+    $invoice = Pembiayaan::with('pembelanjaan')->where('no_invoice',$hasil->no_invoice)->get();
+    
+        return view('invoice',[
+            "title" => "Data Pembiayaan",
+            "invoices" => $hasil,
+            "biaya" => $invoice,
+            
         ]);
     }
+    public function getPembayaranId($id){
 
-    public function store(Request $request){
+        $query=Pembayaran::where('id',$id)->first();
 
-        dd($request);
+        return response()->json(['pembayaran' =>$query]);
 
     }
+    public function bayarInvoice(Request $request,$id){
+        Pembayaran::where('id',$id)->update(['jumlah_bayar' => $request->jumlah_bayar]);
+        return redirect('/tabelpembayaran');
+
+    }
+
+
 }

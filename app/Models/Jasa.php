@@ -9,4 +9,7 @@ class Jasa extends Model
 {
     use HasFactory;
     protected $guarded= ['id'];
+    public function pembiayaan(){
+        return $this->hasMany(Pembiayaan::class);
+    }
 }

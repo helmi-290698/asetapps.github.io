@@ -71,7 +71,7 @@
                     </a>
             </div>
         </li>
-        <li class="dropdown notification-list list-inline-item  d-md-inline-block">
+        <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
             <p>Hai, {{ Auth()->user()->name }}</p>
         </li>
         <li class="dropdown notification-list list-inline-item">

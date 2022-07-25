@@ -17,7 +17,7 @@ class CreateKonsumensTable extends Migration
     {
         Schema::create('konsumens', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_lembaga');
+            $table->foreignId('lembaga_id');
             $table->string('nama');
             $table->string('alamat');
             $table->string('no_telepon');

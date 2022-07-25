@@ -14,7 +14,7 @@ class CreateLembagasTable extends Migration
     public function up()
     {
         Schema::create('lembagas', function (Blueprint $table) {
-            $table->id('id_lembaga');
+            $table->id();
             $table->string('nama_lembaga')->unique();
             $table->timestamps();
         });

@@ -101,7 +101,7 @@
                         <tbody>
                            @foreach ($jasas as $jasa)
                            <tr>
-                            <td>{{ $jasa->id_jasa }}</td>
+                            <td>{{ $jasa->id }}</td>
                             <td>{{ $jasa->nama_jasa }}</td>
                             <td>{{ $jasa->biaya }}</td>
                             <td>{{ $jasa->created_at }}</td>

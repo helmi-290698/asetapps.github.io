@@ -79,10 +79,23 @@
                                 <form action="/tambahpembelanjaan" method="post">
                                     @csrf
                                     <div class="form-group row">
-                                        <label for="barang" class="col-sm-4 col-form-label">Nama Barang</label>
+                                        <label for="barang" class="col-sm-4 col-form-label">Nama Barang/Jasa</label>
                                         <div class="col-sm-8">
                                             <input class="form-control @error('barang') is-invalid @enderror" type="text"  name="barang" id="barang" >
                                             @error('barang')
+                                            <div class="form-control-feedback mt-2">{{ $message }}.</div>
+                                                
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="tipebiaya" class="col-sm-4 col-form-label">Tipe Biaya </label>
+                                        <div class="col-sm-8">
+                                            <select name="tipebiaya" id="tipebiaya" class="form-control">  
+                                               <option value="Barang">Barang</option>
+                                               <option value="Jasa">Jasa</option>
+                                            </select>
+                                            @error('tipebiaya')
                                             <div class="form-control-feedback mt-2">{{ $message }}.</div>
                                                 
                                             @enderror
@@ -102,6 +115,7 @@
                                         <label for="kategori" class="col-sm-4 col-form-label">Kategory Barang</label>
                                         <div class="col-sm-8">
                                             <select name="kategori" id="kategori" class="form-control">
+                                                <option value="">--pilih--</option>
                                                @foreach ($categories as $category)
                                                <option value="{{ $category->id }}">{{ $category->nama_kategory }}</option>
                                                @endforeach
@@ -111,7 +125,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="harga" class="col-sm-4 col-form-label">Harga</label>
+                                        <label for="harga" class="col-sm-4 col-form-label">Harga/Biaya</label>
                                         <div class="col-sm-8">
                                             <input class="form-control @error('harga') is-invalid @enderror" type="number"  name="harga" id="notelepon"  >
                                             @error('harga')
@@ -125,17 +139,6 @@
                                         <div class="col-sm-8">
                                             <input class="form-control @error('jumlah') is-invalid @enderror" type="number"  name="jumlah" id="notelepon"  >
                                             @error('jumlah')
-                                            <div class="form-control-feedback mt-2">{{ $message }}.</div>
-                                                
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group row">
-                                        <label for="total" class="col-sm-4 col-form-label">Total</label>
-                                        <div class="col-sm-8">
-                                            <input class="form-control @error('total') is-invalid @enderror" type="number"  name="total" id="total"  >
-                                            @error('total')
                                             <div class="form-control-feedback mt-2">{{ $message }}.</div>
                                                 
                                             @enderror
@@ -167,11 +170,9 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Nama Barang </th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">merek</th>
-                                <th scope="col">Jumlah </th>
-                                <th scope="col" >Total </th>
+                                <th scope="col">Nama Barang/Jasa</th>
+                                <th scope="col">Tipe Biaya </th>
+                                <th scope="col" >Biaya </th>
                                 <th scope="col" colspan="2" >Action</th>
 
                             </tr>
@@ -183,14 +184,12 @@
                             @endphp
                             <tr>
                                 <td>{{ $pembelanjaan->nama_barang }}</td>
-                                <td>{{ $pembelanjaan->id_categories }}</td>
-                                <td>{{ $pembelanjaan->merek }}</td>
-                                <td>{{ $pembelanjaan->jumlah  }}</td>
-                                <td>Rp. {{  number_format($total,2,',','.')  }}</td>
+                                <td>{{ $pembelanjaan->tipe_biaya  }}</td>
+                                <td>Rp. {{  number_format($pembelanjaan->harga,2,',','.')  }}</td>
 
                                 <td>
                                     <div>
-                                        <a href="#" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Edit data"><i class="mdi mdi-pencil"></i></a>&nbsp;<a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete data"><i class="mdi mdi-delete"></i></a>
+                                        <button class="btn btn-primary btn-sm edit"  data-toggle="tooltip" data-placement="top" title="Edit data" data-id="{{ $pembelanjaan->id }}"><i class="mdi mdi-pencil"></i></button>&nbsp;<a href="#" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete data"><i class="mdi mdi-delete"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -201,7 +200,38 @@
                         </tbody>
                     </table>
                 </div>
-
+                <div class="modal fade bs-example-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title mt-0">Form Bayar </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="post" id="edit-pembelanjaan-form">
+                                    @method('patch')
+                                    @csrf
+                                    <div class="form-group row">
+                                        <label for="status" class="col-sm-4 col-form-label">Id Pembayaran</label>
+                                        <div class="col-sm-8 mb-2">
+                                            <input class="form-control" type="text"  name="pembelanjaan_id" id="pembelanjaan_id" disabled>
+                                            
+                                        </div>
+                                        <label for="status" class="col-sm-4 col-form-label">Jumlah Bayar </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control " type="text"  name="jumlah_bayar" id="status" required >
+                                            
+                                        </div>
+                                    </div>
+                                   
+                                    <button type="submit" class="btn btn-success float-right">Simpan</button>
+                                </form>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
             </div>
         </div>
     </div>
@@ -209,4 +239,26 @@
 </div>
 <!-- END ROW -->
     </div>
+@endsection
+@section('footer')
+    <script>
+        $(function(){
+
+            $(".edit").on('click',function(){
+                let id = $(this).data('id');
+                console.log(id);
+                $.ajax({
+                    url:`/pembelanjaan/${id}/update`,
+                    method:'GET',
+                success: function (data){
+
+                    $("#edit-pembelanjaan-form").attr('action', `pembayaran/`+data.pembelanjaan.id+`/update`);
+                    $('input[name="pembelanjaan_id"]').val(data.pembelanjaan.id);
+                   
+                }
+        })
+        
+    })
+})
+    </script>
 @endsection

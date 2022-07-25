@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class KonsumenController extends Controller
 {
     public function index(){
-        $konsumen = Konsumen::join('lembagas','lembagas.id_lembaga','=','konsumens.id_lembaga')->get();
+        $konsumen = Konsumen::with('lembaga')->get();
         return view('konsumen',[
             "title" => "Data konsumen",
             "konsumens" => $konsumen,
@@ -28,7 +28,7 @@ class KonsumenController extends Controller
         ]);
 
        Konsumen::create([
-            'id_lembaga' => $request->lembaga,
+            'lembaga_id' => $request->lembaga,
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
